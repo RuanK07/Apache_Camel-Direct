@@ -23,10 +23,16 @@ public class DirectApplication {
 		public void configure() throws Exception {
 			from("direct:log-file")
 					.log("Log: ${header.CamelFileName}")
+					.to("direct:log-file2");;
+			
+			from("direct:log-file2")
 					.process(new FileProcessor());
 			
 			from("file:C:\\Users\\ruank\\Documents\\apache-camel\\input")
 					.to("direct:log-file");
+			
+			from("file:C:\\Users\\ruank\\Documents\\apache-camel\\input2")
+			.to("direct:log-file");
 			
 		}
 		
